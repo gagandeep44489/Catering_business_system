@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Menu</h2>
+<div class="row g-2 mb-3">
+  <div class="col-md-4"><input id="searchInput" class="form-control" placeholder="Search menu..."></div>
+  <div class="col-md-3">
+    <select id="categoryFilter" class="form-select">
+      <option value="">All Categories</option>
+      <option>Veg</option>
+      <option>Non-Veg</option>
+      <option>Drinks</option>
+      <option>Dessert</option>
+    </select>
+  </div>
+  <div class="col-md-2"><button class="btn btn-primary w-100" onclick="loadMenu()">Apply</button></div>
+</div>
+<div id="menuList" class="row g-3"></div>
+{% endblock %}
