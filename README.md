@@ -94,6 +94,15 @@ PY
 
 This project safely truncates passwords to **72 bytes** before bcrypt hashing/verification (bcrypt backend limit), preventing the common runtime error on very long passwords.
 
+
+### If you see bcrypt/passlib startup error on Windows
+
+If you get errors from `passlib.handlers.bcrypt` (including the 72-byte message during backend checks), install dependencies exactly from this project because `bcrypt==4.0.1` is pinned for compatibility with `passlib==1.7.4`:
+
+```bash
+pip install -r requirements.txt --upgrade --force-reinstall
+```
+
 ## Docker Deployment
 
 Build and run:
