@@ -78,7 +78,7 @@ async function bindAuth() {
       const data = await api("/auth/login", {
         method: "POST",
         body: JSON.stringify({
-          email: document.getElementById("loginEmail").value,
+          identifier: document.getElementById("loginIdentifier").value,
           password: document.getElementById("loginPassword").value,
         })
       });
@@ -92,7 +92,7 @@ async function bindAuth() {
   registerForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     try {
-      await api("/auth/register", {
+      const data = await api("/auth/register-and-login", {
         method: "POST",
         body: JSON.stringify({
           name: document.getElementById("regName").value,
@@ -100,7 +100,8 @@ async function bindAuth() {
           password: document.getElementById("regPassword").value,
         })
       });
-      msg.innerHTML = `<div class='alert alert-success'>Registration successful. Please login.</div>`;
+      setToken(data.access_token);
+      msg.innerHTML = `<div class='alert alert-success'>Registration successful and logged in.</div>`;
     } catch (err) {
       msg.innerHTML = `<div class='alert alert-danger'>${err.message}</div>`;
     }

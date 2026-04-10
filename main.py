@@ -6,10 +6,44 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from database import Base, engine
+from auth_utils import hash_password
+from database import Base, SessionLocal, engine
+from models import User
 from routers import auth, menu, orders, users
 
 Base.metadata.create_all(bind=engine)
+
+
+def seed_default_users() -> None:
+    db = SessionLocal()
+    try:
+        admin = db.query(User).filter(User.email == "admin@example.com").first()
+        if not admin:
+            db.add(
+                User(
+                    name="admin",
+                    email="admin@example.com",
+                    password=hash_password("Admin@123"),
+                    role="admin",
+                )
+            )
+
+        demo = db.query(User).filter(User.email == "demo@example.com").first()
+        if not demo:
+            db.add(
+                User(
+                    name="demo",
+                    email="demo@example.com",
+                    password=hash_password("Demo@123"),
+                    role="customer",
+                )
+            )
+        db.commit()
+    finally:
+        db.close()
+
+
+seed_default_users()
 
 app = FastAPI(title="Catering Business Management System", version="1.0.0")
 

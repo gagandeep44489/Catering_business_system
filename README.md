@@ -42,7 +42,8 @@ A full-stack Catering Business Management System built with **FastAPI + SQLite +
 ## API Endpoints
 
 - `POST /auth/register`
-- `POST /auth/login`
+- `POST /auth/login` (email or username)
+- `POST /auth/register-and-login`
 - `POST /auth/logout`
 - `GET|POST|PUT|DELETE /menu`
 - `POST|GET /orders`
@@ -62,6 +63,16 @@ uvicorn main:app --reload
 ```
 
 Open: `http://127.0.0.1:8000`
+
+
+## Quick Login (No Manual Register Needed)
+
+Default users are auto-created on startup:
+
+- Admin: `admin@example.com` / `Admin@123`
+- Customer: `demo@example.com` / `Demo@123`
+
+You can login using **email or username** in the login form/API `identifier` field.
 
 ## Create an Admin User
 
