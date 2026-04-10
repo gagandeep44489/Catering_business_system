@@ -78,6 +78,11 @@ print('Updated role to admin')
 PY
 ```
 
+
+## Password Length Note (bcrypt)
+
+This project safely truncates passwords to **72 bytes** before bcrypt hashing/verification (bcrypt backend limit), preventing the common runtime error on very long passwords.
+
 ## Docker Deployment
 
 Build and run:
